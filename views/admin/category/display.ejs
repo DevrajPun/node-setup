@@ -1,0 +1,126 @@
+<%- include("../header.ejs") %> 
+<%- include("../sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h1 class="m-0 text-center">Display Category</h1>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <!-- insert button -->
+          <button
+            type="button"
+            class="btn btn-success px-5"
+            style="float: left"
+            data-toggle="modal"
+            data-target="#modal-default"
+          >
+            Add Category
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <!-- </div> -->
+  <div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table
+        id="example1"
+        class="table table-bordered table-striped text-center"
+      >
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% D.forEach((item)=>{ %>
+
+          <tr>
+            <td><%= item.id %></td>
+            <td><%= item.name %></td>
+            <td>
+              <img src="<%= item.image.url %>" width="50" height="50" alt="" />
+            </td>
+
+            <td>
+              <a
+                href="/admin/category/view/<%= item.id %>"
+                class="btn btn-info mx-1"
+                ><i class="fa-solid fa-eye"></i
+              ></a>
+              <a
+                href="/admin/category/edit/<%= item.id %>"
+                class="btn btn-success mx-1"
+                ><i class="fa-solid fa-pen-to-square"></i
+              ></a>
+              <a
+                href="/category/delete/<%= item.id %>"
+                class="btn btn-danger mx-1"
+                ><i class="fa-solid fa-trash"></i
+              ></a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- insert_model -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="/admin/categoryinsert"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" name="name" class="form-control" value="" />
+            <br />
+            <label for="">Image</label>
+            <input type="file" name="image" class="form-control" />
+            <br />
+            <center>
+              <button class="btn btn-info" type="submit">Insert</button>
+            </center>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<%- include("../footer.ejs") %>

@@ -1,0 +1,251 @@
+<%- include("../header.ejs") %> <%- include("../sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h1 class="m-0 text-center">Course Display</h1>
+        </div>
+      </div>
+      <!-- /.row -->
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <!-- insert button -->
+          <button
+            type="button"
+            class="btn btn-success px-5"
+            style="float: left"
+            data-toggle="modal"
+            data-target="#modal-default"
+          >
+            Add Courses
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <!-- </div> -->
+  <div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table
+        id="example1"
+        class="table table-bordered table-striped text-center"
+      >
+        <thead>
+          <tr>
+            <th>S.no.</th>
+            <th>Course Name</th>
+            <!-- <th>Course Description</th> -->
+            <th>Course Category</th>
+            <th>Course Image</th>
+            <th>Course Duration</th>
+            <th>Course Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% let serialNumber = 1; %> <% D.forEach((item)=>{ %>
+          <tr>
+            <td><%= serialNumber++ %></td>
+            <td><%= item.name %></td>
+            <!-- <td><%= item.description %></td> -->
+            <td><%= item.category %></td>
+            <td>
+              <img src="<%= item.image.url %>" width="50" height="50" alt="" />
+            </td>
+            <td><%= item.duration %></td>
+            <td><%= item.price %></td>
+            <td style="font-size: 19px">
+              <a href="/course/view/<%= item.id %>" class="mx-1"
+                ><i class="fa-solid fa-eye text-info"></i
+              ></a>
+              <a href="/course/edit/<%= item.id %>" class="mx-1"
+                ><i class="fa-solid fa-pen-to-square text-success"></i
+              ></a>
+              <a href="/course/delete/<%= item.id %>" class="mx-1"
+                ><i class="fa-solid fa-trash text-danger"></i
+              ></a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.content-wrapper -->
+
+<!-- insert_model -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Adding Course</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="/course/insert"
+          method="post"
+          enctype="multipart/form-data"
+          id="courseForm"
+        >
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="name">Course Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  value=""
+                  required
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="duration">Course Duration</label>
+                <input
+                  type="text"
+                  name="duration"
+                  class="form-control"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <label for="description">Course Description</label>
+                <textarea
+                  type="text"
+                  name="description"
+                  id="description"
+                  class="form-control"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="category">Course Category</label>
+                <select
+                  name="category"
+                  id="category"
+                  class="form-control"
+                  required
+                >
+                  <option value="">Select Category</option>
+                  <% c.forEach((item) =>{ %>
+                  <option value="<%= item.name %>"><%= item.name %></option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="instructor">Instructor Name</label>
+                <input
+                  type="text"
+                  name="instructor"
+                  class="form-control"
+                  value=""
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="lectures">No. of Lectures</label>
+                <input
+                  type="number"
+                  name="lectures"
+                  class="form-control"
+                  value=""
+                  required
+                  min="1"
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="language">Language</label>
+                <input
+                  type="text"
+                  name="language"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="skill_level">Skill-Level</label>
+                <input
+                  type="text"
+                  name="skill_level"
+                  class="form-control"
+                  value=""
+                  required
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="rating">Rating</label>
+                <input
+                  type="number"
+                  name="rating"
+                  class="form-control"
+                  min="1"
+                  max="5"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label for="price">Course Price</label>
+                <input
+                  type="text"
+                  name="price"
+                  class="form-control"
+                  value=""
+                  required
+                />
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="image">Course Image</label>
+                <input type="file" name="image" class="mt-1" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <center>
+                  <button class="btn btn-info" type="submit">Insert</button>
+                </center>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<%- include("../footer.ejs") %>

@@ -1,0 +1,43 @@
+<%- include("../header.ejs") %> <%- include("../sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <h1 class="m-0 text-center">View Category</h1>
+  </div>
+  <!-- /.content-header -->
+  <!-- </div> -->
+  <div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table
+        
+        class="table table-bordered table-striped text-center"
+      >
+        <thead>
+          <tr>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Image</th>
+            </tr>
+          </tr>
+        </thead>
+        <tbody >
+          <td style="padding-top: 30px;font-size: 20px;"><%= D.id %></td>
+          <td style="padding-top: 30px;font-size: 20px;"><%= D.name %></td>
+          <td>
+            <img src="<%= D.image.url %>" width="70" height="70" alt="" />
+          </td>
+        </tbody>
+      </table>
+      <br>
+      <center>
+        <a href="/admin/category/display" class="btn btn-info mb-3">Back</a>
+      </center>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<%- include("../footer.ejs") %>

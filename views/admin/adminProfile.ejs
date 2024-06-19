@@ -1,0 +1,166 @@
+<%- include("./header.ejs") %> <%- include("./sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <div class="container d-flex justify-content-center align-items-center pt-4">
+    <div
+      class="card shadow-lg"
+      style="
+        width: 330px;
+        height: 450px;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: rgb(247, 249, 249);
+      "
+    >
+      <div style="height: 160px; background-color: rgb(42, 59, 146)">
+        <div class="card-body text-center">
+          <h4 class="text-white">Profile</h4>
+          <div class="row d-flex justify-content-center">
+            <div
+              class="rounded-circle"
+              style="
+                overflow: hidden;
+                border: 7px solid rgb(221, 218, 218);
+                width: 170px;
+                height: 170px;
+                margin-top: 20px;
+              "
+            >
+              <img
+                src="<%= image.url %>"
+                class="w-100"
+                style="object-fit: cover; object-position: center; height: 100%"
+                alt=""
+              />
+            </div>
+          </div>
+          <h2 style="font-weight: 900; margin-bottom: 0"><%= name %></h2>
+          <p><%= email %></p>
+          <br />
+          <center>
+            <button
+              type="button"
+              class="mx-3"
+              data-toggle="modal"
+              data-target="#profileUpdate"
+            >
+              <i class="fa-solid fa-pen-nib text-success"></i>
+            </button>
+
+            <button
+              type="button"
+              class="mx-3"
+              data-toggle="modal"
+              data-target="#ChangePassword"
+            >
+              <i class="fa-solid fa-key text-success"></i>
+            </button>
+          </center>
+        </div>
+      </div>
+    </div>
+
+    <!--updateProfile Modal -->
+    <div class="modal fade" id="profileUpdate">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Profile Update</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form
+              action="/updateProfile"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="form-group">
+                <label for="">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  value="<%= name %>"
+                />
+                <br />
+                <label for="">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  class="form-control"
+                  value="<%= email %>"
+                />
+                <br />
+                <div class="d-flex justify-content-center">
+                  <label for="">Image</label>
+                  <input type="file" name="image" class="mx-4 mt-3" />
+                  <img src="<%= image.url %>" alt="" width="50" class="mx-4" />
+                </div>
+                <br />
+                <br />
+                <center>
+                  <button class="btn btn-info" type="submit">Update</button>
+                </center>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!--End updateProfile Modal -->
+
+    <!--Change Password Modal -->
+    <div class="modal fade" id="ChangePassword">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Change Password</h4>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="/changePassword" method="post">
+              <div class="mb-3">
+                <label for="">Old Password</label>
+                <input type="text" name="op" class="form-control" />
+              </div>
+              <div class="mb-3">
+                <label for="">New Password</label>
+                <input type="password" name="np" class="form-control" />
+              </div>
+              <div class="mb-3">
+                <label for="">Confirm Password</label>
+                <input type="password" name="cp" class="form-control" />
+              </div>
+              <button type="submit" class="btn btn-success">
+                Change Password
+              </button>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!--End Change Password Modal -->
+  </div>
+</div>
+
+<!--container end-->
+
+<%- include("./footer.ejs") %>

@@ -1,0 +1,68 @@
+<%- include("../header.ejs") %> <%- include("../sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <br />
+  <div class="col-6 mx-auto card">
+    <h3 class="text-center mt-3">Course Edit</h3>
+    <div class="card-body">
+      <form
+        action="/course/update/<%= D.id %>"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div class="form-group">
+          <label for="">Course Name</label>
+          <input
+            type="text"
+            name="name"
+            class="form-control mb-2"
+            value="<%= D.name %>"
+          />
+
+          <label for="">Course Description</label>
+          <input
+            type="text"
+            name="description"
+            class="form-control mb-2"
+            value="<%= D.description %>"
+          />
+
+          <label for="">Course Category</label>
+          <select name="category" id="" class="form-control mb-2">
+            <option value="">Select Category</option>
+            <% c.forEach((item) =>{ %>
+            <option value="<%= item.name %>"><%= item.name %></option>
+            <% }) %>
+          </select>
+
+          <label for="">Course Duration</label>
+          <input
+            type="text"
+            name="duration"
+            class="form-control mb-2"
+            value="<%= D.duration %>"
+          />
+
+          <label for="">Course Price</label>
+          <input
+            type="text"
+            name="price"
+            class="form-control mb-2"
+            value="<%= D.price %>"
+          />
+
+          <label for="">Course Image</label>
+          <input type="file" name="image" class="my-2" />
+          <img src="<%= D.image.url %>" width="50" height="50" alt="" />
+          <br /><br />
+          <center>
+            <button class="btn btn-info" type="submit">Update</button>
+          </center>
+        </div>
+      </form>
+    </div>
+  </div>
+  <br />
+</div>
+
+<%- include("../footer.ejs") %>

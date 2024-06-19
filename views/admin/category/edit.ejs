@@ -1,0 +1,38 @@
+<%- include("../header.ejs") %> <%- include("../sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <br /><br /><br />
+  <div class="col-6 mx-auto card">
+    <h3 class="text-center mt-3">Category Edit</h3>
+    <div class="card-body">
+      <form
+        action="/admin/category/update/<%= D.id %>"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label for="name">Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          required
+          value="<%= D.name %>"
+        />
+        <br />
+        <div class="d-flex justify-content-center">
+          <label for="image">Img</label> &nbsp;&nbsp;
+          <input type="file" name="image" /><br />
+          <label for="image">previous img</label> &nbsp;
+          <img src="<%= D.image.url %>" width="50" height="50" alt="" />
+        </div>
+        <br />
+        <br />
+        <center>
+          <button type="submit" class="btn btn-success">submit</button>
+        </center>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include("../footer.ejs") %>

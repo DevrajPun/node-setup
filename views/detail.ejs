@@ -1,0 +1,268 @@
+<%- include("header.ejs") %>
+
+<!-- Header Start -->
+<div class="position-relative overlay-bottom text" style="margin-bottom: 90px">
+  <div class="container text-center py-5">
+    <h1 class="display-1">Course Detail</h1>
+    <div class="d-inline-flex text-dark mb-5">
+      <p class="m-0 text-uppercase"><a class="text-dark" href="">Home</a></p>
+      <i class="fa fa-angle-double-right pt-1 px-3"></i>
+      <p class="m-0 text-uppercase">Course Detail</p>
+    </div>
+    <div class="mx-auto mb-5" style="width: 100%; max-width: 600px">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <button
+            class="btn btn-outline-light bg-white text-body px-4 dropdown-toggle"
+            type="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            Courses
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Courses 1</a>
+            <a class="dropdown-item" href="#">Courses 2</a>
+            <a class="dropdown-item" href="#">Courses 3</a>
+          </div>
+        </div>
+        <input
+          type="text"
+          class="form-control border-light"
+          style="padding: 30px 25px"
+          placeholder="Keyword"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn px-4 px-lg-5 text-white"
+            style="background-color: rgba(0, 0, 0, 0.934)"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Header End -->
+
+<!-- Detail Start -->
+<div class="container-fluid py-2">
+  <div class="container py-2">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="mb-5">
+          <div class="section-title position-relative mb-5">
+            <h6
+              class="d-inline-block position-relative text-secondary text-uppercase pb-2"
+            >
+              course details
+            </h6>
+            <h1 class="display-4"><%= d.name %></h1>
+          </div>
+          <img
+            class="img-fluid rounded mb-4"
+            src="<%= d.image.url %>"
+            alt="Image"
+          />
+          <p><%= d.description %></p>
+        </div>
+
+        <h2 class="mb-3">Related Courses</h2>
+        <% c.forEach((item)=>{ %>
+        <div
+          class="owl-carousel related-carousel position-relative"
+          style="padding: 0 30px"
+        >
+          <a
+            class="courses-list-item position-relative d-block overflow-hidden mb-2"
+            href="/detail/<%= item._id %>"
+          >
+            <img class="img-fluid" src="<%= item.image.url %>" alt="" />
+            <div class="courses-text">
+              <h4 class="text-center text-white px-3"><%=item.name %></h4>
+              <div class="border-top w-100 mt-3">
+                <div class="d-flex justify-content-between p-4">
+                  <span class="text-white"
+                    ><i class="fa fa-user mr-2"></i><%=item.instructor %></span
+                  >
+                  <span class="text-white"
+                    ><i class="fa fa-star mr-2"></i><%=item.rating %>
+                    <small>(250)</small></span
+                  >
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <% })%>
+      </div>
+
+      <div class="col-lg-4 mt-5 mt-lg-0">
+        <div
+          class="mb-5 py-3"
+          style="background-color: rgba(87, 58, 58, 0.704)"
+        >
+          <h3 class="text-white py-3 px-4 m-0">Course Features</h3>
+          <div class="d-flex justify-content-between border-bottom px-4">
+            <h6 class="text-white my-3">Instructor</h6>
+            <h6 class="text-white my-3"><%= d.instructor %></h6>
+          </div>
+          <div class="d-flex justify-content-between border-bottom px-4">
+            <h6 class="text-white my-3">Rating</h6>
+            <h6 class="text-white my-3">
+              <%= d.rating %> <small>(250)</small>
+            </h6>
+          </div>
+          <div class="d-flex justify-content-between border-bottom px-4">
+            <h6 class="text-white my-3">Lectures</h6>
+            <h6 class="text-white my-3"><%= d.lectures %></h6>
+          </div>
+          <div class="d-flex justify-content-between border-bottom px-4">
+            <h6 class="text-white my-3">Duration</h6>
+            <h6 class="text-white my-3"><%= d.duration %></h6>
+          </div>
+          <div class="d-flex justify-content-between border-bottom px-4">
+            <h6 class="text-white my-3">Skill level</h6>
+            <h6 class="text-white my-3"><%= d.skill_level %></h6>
+          </div>
+          <div class="d-flex justify-content-between px-4">
+            <h6 class="text-white my-3">Language</h6>
+            <h6 class="text-white my-3"><%= d.language %></h6>
+          </div>
+          <h5 class="text-white py-3 px-4 m-0">Course Price: <%= d.price %></h5>
+          <div class="py-3 px-4">
+            <button
+              class="btn btn-block py-3 px-5"
+              style="background-color: aliceblue"
+              data-toggle="modal"
+              data-target="#modal-default"
+            >
+              Enroll Now
+            </button>
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <h2 class="mb-3">Course Categories</h2>
+          <ul class="list-group list-group-flush">
+            <% ca.forEach((item)=>{ %>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center px-3"
+            >
+              <a href="" class="text-decoration-none h6 m-0"
+                ><%= item.name %></a
+              >
+              <span
+                class="shadow-lg"
+                style="overflow: hidden; border-radius: 50px"
+                ><img
+                  src="<%= item.image.url %>"
+                  width="50px"
+                  height="50px"
+                  style="border-radius: 50px"
+              /></span>
+            </li>
+            <%}) %>
+          </ul>
+        </div>
+
+        <div class="mb-5">
+          <h2 class="mb-4">Recent Courses</h2>
+          <% c.forEach((item)=>{%>
+          <a
+            class="d-flex align-items-center text-decoration-none mb-4"
+            href=""
+          >
+            <img
+              class="img-fluid rounded"
+              src="<%= item.image.url %>"
+              style="width: 40px; height: 40px"
+              alt=""
+            />
+            <div class="pl-3">
+              <h6></h6>
+              <div class="d-flex">
+                <small class="text-body mr-3"
+                  ><i class="fa fa-user text-primary mr-2"></i><%=
+                  item.instructor%></small
+                >
+                <small class="text-body"
+                  ><i class="fa fa-star text-primary mr-2"></i><%=
+                  item.rating%></small
+                >
+              </div>
+            </div>
+          </a>
+          <%}) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Detail End -->
+
+<!-- enroll -->
+<div class="modal fade" id="modal-default">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Enroll here</h4>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form
+          action="/enroll/insert"
+          method="post"
+          enctype="multipart/form-data"
+        >
+          <div class="form-group">
+            <label for="">Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              value=""
+              required
+            />
+            <br />
+            <label for="">Email</label>
+            <input type="email" name="email" class="form-control" value="" required />
+            <br />
+            <label for="">Phone Number</label>
+            <input
+              type="text"
+              name="phonenumber"
+              class="form-control"
+              required
+            />
+            <br />
+            <label for="">Course</label>
+            <input
+              type="text"
+              name="course"
+              class="form-control"
+              value=""
+            />
+            <br />
+            <center>
+              <button class="btn btn-info" type="submit">Apply</button>
+            </center>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<%- include("footer.ejs") %>

@@ -1,0 +1,82 @@
+<%- include("../header.ejs") %> <%- include("../sidebar.ejs") %>
+
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <h1 class="m-0 text-center">Course View</h1>
+        </div>
+      </div>
+    </div>
+    <!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+  <!-- </div> -->
+  <div class="card">
+    <!-- /.card-header -->
+    <div class="card-body">
+      <table class="table table-bordered table-striped text-center">
+        <thead>
+          <tr>
+            <th>Course ID</th>
+            <th>Course Name</th>
+            <th>Course Category</th>
+            <th>Instructor Nmae</th>
+            <th>Course Language</th>
+            <th>No. of Lectures</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= D.id %></td>
+            <td><%= D.name %></td>
+            <td><%= D.category %></td>
+            <td><%= D.instructor %></td>
+            <td><%= D.language %></td>
+            <td><%= D.lectures %></td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <table class="table table-bordered table-striped text-center">
+        <thead>
+          <tr>
+            <th>Course Description</th>
+            <th>Course Duration</th>
+            <th>Rating</th>
+            <th>Skill-Level</th>
+            <th>Course Price</th>
+            <th>Image</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= D.description %></td>
+            <td><%= D.duration %></td>
+            <td><%= D.rating %></td>
+            <td><%= D.skill_level %></td>
+            <td><%= D.price %></td>
+            <td>
+              <img src="<%= D.image.url %>" width="50" height="50" alt="" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <center>
+        <button
+          onclick="window.location.href='/course/dispaly'"
+          class="btn btn-info mt-3"
+        >
+          Back
+        </button>
+      </center>
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.content-wrapper -->
+
+<%- include("../footer.ejs") %>
